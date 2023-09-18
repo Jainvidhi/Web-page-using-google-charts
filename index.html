@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Dashboard with Google Charts API and D3.js</title>
+  <!-- Include the Google Charts API library -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script type="text/javascript">
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawCharts);
+
+    // Callback function to draw the charts.
+    function drawCharts() {
+      // Create data for the pie chart.
+      var pieData = google.visualization.arrayToDataTable([
+         ['Name of Game', 'Sales'],
+          ['Wii Sports',      8.46],
+          ['Super Mario Bros.',      0.77],
+          [' Mario Kart Wii',   3.31 ],
+          [' Wii Sports Resort', 2.96],
+          ['Indo Pokemon Red/Pokemon Blue',   1.00]
+      ]);
+
+      // Create data for the bar chart.
+      var barData = google.visualization.arrayToDataTable([
+        ['Name of Region', '% Growth in sales'],
+        ['NA_Sales ', 6],
+        ['EU_Sales', 2.2],
+        ['JP_Sales', 1.8],
+        ['Other_Sales  ', 0],
+        ['Global_Sales', -1.5]
+      ]);
+
+      // Create data for the line chart.
+      var lineData = google.visualization.arrayToDataTable([
+        ['Month', 'Sales in M'],
+        ['Jan', 100],
+        ['Feb', 150],
+        ['Mar', 200],
+        ['Apr', 120],
+        ['May', 300],
+        ['june', 420],
+        ['July', 200],
+        ['Aug', 210],
+        ['Sep', 250],
+        ['Oct', 260],
+        ['Nov', 180],
+        ['Dec', 200]
+      ]);
+
+      // Create options for the pie chart.
+      var pieOptions = {
+        title: 'Sale Distribution',
+        pieHole: 0.5
+      };
+
+      // Create options for the bar chart.
+      var barOptions = {
+        title: 'Percentage Growth in Sales'
+      };
+
+      // Create options for the line chart.
+      var lineOptions = {
+        title: 'Sales of Wii Sports game in different month',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+      };
+
+      // Instantiate and draw the pie chart and bar chart.
+      var pieChart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+      pieChart.draw(pieData, pieOptions);
+
+      var barChart = new google.visualization.BarChart(document.getElementById('bar-chart'));
+      barChart.draw(barData, barOptions);
+
+      // Instantiate and draw the line chart.
+      var lineChart = new google.visualization.LineChart(document.getElementById('line-chart'));
+      lineChart.draw(lineData, lineOptions);
+
+    }
+
+  </script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 30px;
+    }
+    #charts-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .chart {
+      width: 700px;
+      height: 400px;
+      margin: 12px;
+    }
+    .description {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Web Page of Sales Mangement using Google Charts</h1>
+  <div id="charts-container">
+    <div class="chart" id="pie-chart"></div>
+    <div class="chart" id="bar-chart"></div>
+    <div class="chart" id="line-chart"></div>
+  </div>
+</body>
+</html>
